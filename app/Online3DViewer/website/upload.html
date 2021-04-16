@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>Quick3D</title>
+
+    <script src="https://www.gstatic.com/firebasejs/7.7.0/firebase-app.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/7.7.0/firebase-storage.js"></script>
+
+  <script>
+    var firebaseConfig = {
+        apiKey: "AIzaSyBHUU0WTY8j9QDX-rEx-rNvMrRIzwI9l5E",
+        authDomain: "quick3d-a9d3d.firebaseapp.com",
+        projectId: "quick3d-a9d3d",
+        storageBucket: "quick3d-a9d3d.appspot.com",
+        messagingSenderId: "751533499745",
+        appId: "1:751533499745:web:56b8968d9258a20b569120",
+        measurementId: "G-XGRYMWCTYW"
+    };
+    // Initialize Firebase
+    firebase.initializeApp(firebaseConfig);
+    console.log(firebase);
+    var objName = "";
+    var fileName = "";
+    function uploadImage() {
+        var ref = firebase.storage().ref();
+        var file = document.querySelector("#photo").files[0];
+        var name = file.name;
+        fileName = name;
+        console.log("img file name:",name);
+        var metadata = {
+            contentType: file.type
+        };
+        console.log(ref);
+        var task = ref.child('img/'+name).put(file, metadata);
+        task.on('state_changed', 
+            (snapshot) => {
+                // Observe state change events such as progress, pause, and resume
+                // Get task progress, including the number of bytes uploaded and the total number of bytes to be uploaded
+                var progress = (snapshot.bytesTransferred / snapshot.totalBytes) * 100;
+                console.log('Upload is ' + progress + '% done');
+                switch (snapshot.state) {
+                case firebase.storage.TaskState.PAUSED: // or 'paused'
+                    console.log('Upload is paused');
+                    break;
+                case firebase.storage.TaskState.RUNNING: // or 'running'
+                    console.log('Upload is running');
+                    break;
+                }
+            }, 
+            (error) => {
+                // Handle unsuccessful uploads
+            }, 
+            () => {
+                // Handle successful uploads on complete
+                // For instance, get the download URL: https://firebasestorage.googleapis.com/...
+                task.snapshot.ref.getDownloadURL().then((downloadURL) => {
+                    console.log('File available at', downloadURL);
+                    document.querySelector("#image").src = downloadURL;
+                    document.querySelector("#image").style = "width:200px; height:auto;border: 3px dotted grey;"
+                }).catch(console.error);
+            }
+        );
+    }
+    function Show3DModel(){
+        // appending link to the div href;
+        objName = "https://storage.googleapis.com/quick3d-a9d3d.appspot.com/obj/" + fileName.split(".")[0] + ".obj"; 
+
+        var  link = document.createTextNode("3D Viewer:",fileName.split(".")+".obj")
+        var newTabLink = 'index.html#model='+objName;
+        console.log("Mojj: ",newTabLink);
+        window.open('index.html#model='+objName, '_blank').focus();
+    }
+  </script>
+
+    <script type="text/javascript" src="../../libs/three.min-126.js"></script>
+    <!-- importer start -->
+    <script type="text/javascript" src="../../source/core/core.js"></script>
+    <script type="text/javascript" src="../../source/core/taskrunner.js"></script>
+    <script type="text/javascript" src="../../source/geometry/geometry.js"></script>
+    <script type="text/javascript" src="../../source/geometry/coord2d.js"></script>
+    <script type="text/javascript" src="../../source/geometry/coord3d.js"></script>
+    <script type="text/javascript" src="../../source/geometry/matrix.js"></script>
+    <script type="text/javascript" src="../../source/geometry/transformation.js"></script>
+    <script type="text/javascript" src="../../source/geometry/tween.js"></script>
+    <script type="text/javascript" src="../../source/io/binaryreader.js"></script>
+    <script type="text/javascript" src="../../source/io/binarywriter.js"></script>
+    <script type="text/javascript" src="../../source/io/textwriter.js"></script>
+    <script type="text/javascript" src="../../source/io/bufferutils.js"></script>
+    <script type="text/javascript" src="../../source/io/fileutils.js"></script>
+    <script type="text/javascript" src="../../source/model/modelentities.js"></script>
+    <script type="text/javascript" src="../../source/model/mesh.js"></script>
+    <script type="text/javascript" src="../../source/model/meshbuffer.js"></script>
+    <script type="text/javascript" src="../../source/model/model.js"></script>
+    <script type="text/javascript" src="../../source/model/modelutils.js"></script>
+    <script type="text/javascript" src="../../source/model/modelfinalization.js"></script>
+    <script type="text/javascript" src="../../source/import/importerutils.js"></script>
+    <script type="text/javascript" src="../../source/import/importerbase.js"></script>
+    <script type="text/javascript" src="../../source/import/importerobj.js"></script>
+    <script type="text/javascript" src="../../source/import/importerstl.js"></script>
+    <script type="text/javascript" src="../../source/import/importeroff.js"></script>
+    <script type="text/javascript" src="../../source/import/importerply.js"></script>
+    <script type="text/javascript" src="../../source/import/importer3ds.js"></script>
+    <script type="text/javascript" src="../../source/import/importergltf.js"></script>
+    <script type="text/javascript" src="../../source/import/importer.js"></script>
+    <script type="text/javascript" src="../../source/export/exporterutils.js"></script>
+    <script type="text/javascript" src="../../source/export/exporterbase.js"></script>
+    <script type="text/javascript" src="../../source/export/exporterobj.js"></script>
+    <script type="text/javascript" src="../../source/export/exporterstl.js"></script>
+    <script type="text/javascript" src="../../source/export/exporterply.js"></script>
+    <script type="text/javascript" src="../../source/export/exporteroff.js"></script>
+    <script type="text/javascript" src="../../source/export/exportergltf.js"></script>
+    <script type="text/javascript" src="../../source/export/exporter.js"></script>
+    <script type="text/javascript" src="../../source/external/three.converter.js"></script>
+    <script type="text/javascript" src="../../source/external/three.model.loader.js"></script>
+    <script type="text/javascript" src="../../source/parameters/parameterlist.js"></script>
+    <script type="text/javascript" src="../../source/viewer/domutils.js"></script>
+    <script type="text/javascript" src="../../source/viewer/navigation.js"></script>
+    <script type="text/javascript" src="../../source/viewer/viewer.js"></script>
+    <script type="text/javascript" src="../../source/viewer/domviewer.js"></script>
+    <!-- importer end -->
+    <script type='text/javascript'>
+        OV.Init3DViewerElements ();
+</script>
+
+
+
+  
+</head>
+  <body>
+    <input type="file" id="photo" />
+    <button onclick="uploadImage()">Upload Image</button>
+
+    <div class="box">
+        <img id="image" src="">
+    </div>
+    
+    <button onclick="Show3DModel()">Show 3D Model</button>
+    
+  </body>
+</html>

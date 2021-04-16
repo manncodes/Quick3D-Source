@@ -1,0 +1,206 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+	<meta http-equiv="content-type" content="text/html;charset=utf-8">
+	<meta name="viewport" content="width=device-width, user-scalable=no">
+	<link rel="icon" type="image/png" href="assets/images/3dviewer_net_favicon.png">
+
+	<title>Quick3D</title>
+
+	<!-- Firebase-->
+	<!-- The core Firebase JS SDK is always required and must be listed first -->
+	<script src="https://www.gstatic.com/firebasejs/8.3.3/firebase-app.js"></script>
+
+	<!-- TODO: Add SDKs for Firebase products that you want to use
+		https://firebase.google.com/docs/web/setup#available-libraries -->
+	<script src="https://www.gstatic.com/firebasejs/8.3.3/firebase-storage.js"></script>
+	<script src="https://www.gstatic.com/firebasejs/8.3.3/firebase-firestore.js"></script>
+
+	<script>
+	  
+	// Your web app's Firebase configuration
+	// For Firebase JS SDK v7.20.0 and later, measurementId is optional
+	var firebaseConfig = {
+		apiKey: "AIzaSyBHUU0WTY8j9QDX-rEx-rNvMrRIzwI9l5E",
+		authDomain: "quick3d-a9d3d.firebaseapp.com",
+		projectId: "quick3d-a9d3d",
+		storageBucket: "quick3d-a9d3d.appspot.com",
+		messagingSenderId: "751533499745",
+		appId: "1:751533499745:web:56b8968d9258a20b569120",
+		measurementId: "G-XGRYMWCTYW"
+	};
+	// Initialize Firebase
+	firebase.initializeApp(firebaseConfig);
+	var db = firebase.firestore();
+	var storage    = firebase.storage();
+	var storageRef = storage.ref();	
+
+	// db.collection("obj").get().then((querySnapshot) => {
+	// 	querySnapshot.forEach((doc) => {
+	// 		console.log(doc.id ,'=>', doc.data().link);
+	// 	});
+	// });
+
+	var docRef = db.collection("obj").doc("aDEGMj2UJoR1f3DZ52mu");
+	
+	var getOptions = {
+    	source: ''
+	};
+
+	docRef.get(getOptions).then((doc) => {
+		// Document was found in the cache. If no cached document exists,
+		// an error will be returned to the 'catch' block below.
+		console.log("Cached document data link:", doc.data().link);
+		var imgurl = "https://storage.googleapis.com/quick3d-a9d3d.appspot.com/"+ doc.data().image;
+		var objurl = "index.html#model=" + doc.data().link;
+		var objElement = document.getElementById('preview-obj');
+		var imgElement = document.getElementById('preview-img');
+		objElement.setAttribute("href",objurl)
+		imgElement.setAttribute("href",imgurl)
+
+	}).catch((error) => {
+		console.log("Error getting cached document:", error);
+	});
+
+
+	// var imgRef = storageRef.child('img/1.jpg');
+	// // Get the download URL
+	// imgRef.getDownloadURL()
+	// .then((url) => {
+	// 	console.log(url)
+	// 	var test = url;
+	// 	document.querySelector('#preview-img').src = test;
+	// })
+	</script>
+
+	<!-- libs start -->
+	<script type="text/javascript" src="../libs/jquery-3.5.1.min.js"></script>
+	<script type="text/javascript" src="../libs/three.min-126.js"></script>
+	<!-- libs end -->
+	
+	<!-- meta start -->
+	<!-- meta end -->
+
+	<!-- importer start -->
+	<script type="text/javascript" src="../source/core/core.js"></script>
+	<script type="text/javascript" src="../source/core/taskrunner.js"></script>
+	<script type="text/javascript" src="../source/geometry/geometry.js"></script>
+	<script type="text/javascript" src="../source/geometry/coord2d.js"></script>
+	<script type="text/javascript" src="../source/geometry/coord3d.js"></script>
+	<script type="text/javascript" src="../source/geometry/matrix.js"></script>
+	<script type="text/javascript" src="../source/geometry/transformation.js"></script>
+	<script type="text/javascript" src="../source/geometry/tween.js"></script>
+	<script type="text/javascript" src="../source/io/binaryreader.js"></script>
+	<script type="text/javascript" src="../source/io/binarywriter.js"></script>
+	<script type="text/javascript" src="../source/io/textwriter.js"></script>
+	<script type="text/javascript" src="../source/io/bufferutils.js"></script>
+	<script type="text/javascript" src="../source/io/fileutils.js"></script>
+	<script type="text/javascript" src="../source/model/modelentities.js"></script>
+	<script type="text/javascript" src="../source/model/mesh.js"></script>
+	<script type="text/javascript" src="../source/model/meshbuffer.js"></script>
+	<script type="text/javascript" src="../source/model/model.js"></script>
+	<script type="text/javascript" src="../source/model/modelutils.js"></script>
+	<script type="text/javascript" src="../source/model/modelfinalization.js"></script>
+	<script type="text/javascript" src="../source/import/importerutils.js"></script>
+	<script type="text/javascript" src="../source/import/importerbase.js"></script>
+	<script type="text/javascript" src="../source/import/importerobj.js"></script>
+	<script type="text/javascript" src="../source/import/importerstl.js"></script>
+	<script type="text/javascript" src="../source/import/importeroff.js"></script>
+	<script type="text/javascript" src="../source/import/importerply.js"></script>
+	<script type="text/javascript" src="../source/import/importer3ds.js"></script>
+	<script type="text/javascript" src="../source/import/importergltf.js"></script>
+	<script type="text/javascript" src="../source/import/importer.js"></script>
+	<script type="text/javascript" src="../source/export/exporterutils.js"></script>
+	<script type="text/javascript" src="../source/export/exporterbase.js"></script>
+	<script type="text/javascript" src="../source/export/exporterobj.js"></script>
+	<script type="text/javascript" src="../source/export/exporterstl.js"></script>
+	<script type="text/javascript" src="../source/export/exporterply.js"></script>
+	<script type="text/javascript" src="../source/export/exporteroff.js"></script>
+	<script type="text/javascript" src="../source/export/exportergltf.js"></script>
+	<script type="text/javascript" src="../source/export/exporter.js"></script>
+	<script type="text/javascript" src="../source/external/three.converter.js"></script>
+	<script type="text/javascript" src="../source/external/three.model.loader.js"></script>
+	<script type="text/javascript" src="../source/parameters/parameterlist.js"></script>
+	<script type="text/javascript" src="../source/viewer/domutils.js"></script>
+	<script type="text/javascript" src="../source/viewer/navigation.js"></script>
+	<script type="text/javascript" src="../source/viewer/viewer.js"></script>
+	<script type="text/javascript" src="../source/viewer/domviewer.js"></script>
+	<!-- importer end -->
+	
+	<!-- website start -->
+	<script type="text/javascript" src="o3dv/utils.js"></script>
+	<script type="text/javascript" src="o3dv/toolbar.js"></script>
+	<script type="text/javascript" src="o3dv/treeview.js"></script>
+	<script type="text/javascript" src="o3dv/modal.js"></script>
+	<script type="text/javascript" src="o3dv/dialogs.js"></script>
+	<script type="text/javascript" src="o3dv/modeldata.js"></script>
+	<script type="text/javascript" src="o3dv/info.js"></script>
+	<script type="text/javascript" src="o3dv/menu.js"></script>
+	<script type="text/javascript" src="o3dv/hashhandler.js"></script>
+	<link rel="stylesheet" type="text/css" href="o3dv/website.css">
+	<script type="text/javascript" src="o3dv/loader.js"></script>
+	<script type="text/javascript" src="o3dv/website.js"></script>
+	<script type="text/javascript" src="o3dv/embed.js"></script>
+	<!-- website end -->
+
+	<script type='text/javascript'>
+		$(window).on ('load', function () {
+			let website = new OV.Website ({
+				headerDiv : $('#header'),
+				toolbarDiv : $('#toolbar'),
+				mainDiv : $('#main'),
+				introDiv : $('#intro'),
+				menuDiv : $('#main_menu'),
+				viewerDiv : $('#main_viewer'),
+				fileInput : $('#open_file')
+			});
+			website.Load ();
+		});
+	</script>
+	<!-- script start -->
+	<!-- script end -->
+</head>
+
+<body>
+	<input type="file" id="open_file" style="display:none;" multiple></input>
+	<div class="header" id="header">
+		<div class="title">
+			<div class="title_left">
+				<a href="index.html">
+					<div class="intro_section intro_big_text">
+						Quick3D
+					</div>
+				</a>
+			</div>
+			<div class="title_right" id="header_buttons">
+			</div>
+		</div>
+		<div class="toolbar" id="toolbar"></div>
+	</div>
+	<img style="max-width: 100px; height: auto;" id="preview-img" src="">
+	<div class="main" id="main">
+		<div class="main_menu only_full_width" id="main_menu">
+		</div>
+		<div class="main_viewer" id="main_viewer">
+		</div>
+	</div>
+	<div class="intro ov_thin_scrollbar" id="intro">
+		<div class="intro_section only_full_width only_full_height"><img src="assets/images/3dviewer_net_logo.svg" class="intro_logo"></img></div>
+		<div class="intro_section intro_big_text">
+			Open Model here.<br>
+		</div>
+		<div class="intro_section">
+			Or you can use the browse button above.
+		</div>
+		<div class="intro_section only_full_height">
+			<div>Firebase Example models:</div>
+			<div class="example_models">
+				<span style="color:	 	#aaaaaa;"> | </span	>
+				<a id="preview-obj" href="index.html">firebase example 1</a>
+			</div>
+		</div>
+	</div>
+</body>
+
+</html>

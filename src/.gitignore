@@ -1,0 +1,6 @@
+*.pt
+
+__pycache__/
+ *.pyc
+
+*.obj
