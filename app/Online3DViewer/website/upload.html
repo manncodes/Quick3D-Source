@@ -125,19 +125,41 @@
         OV.Init3DViewerElements ();
 </script>
 
+<link rel="stylesheet" href="style.css">
 
 
   
 </head>
   <body>
-    <input type="file" id="photo" />
-    <button onclick="uploadImage()">Upload Image</button>
+    <div id="animated-example" class="animated fadeIn">Quick3D</div>
 
-    <div class="box">
-        <img id="image" src="">
+    <script>
+        function myFunction() {
+            location.reload();
+        }
+    </script>
+    <div class="main-wrapper">
+        <div>
+            <h1 class="ml11">
+                <span class="text-wrapper">
+                    <span class="line line1"></span>
+                    <span class="letters">Convert your 2D images to 3D model</span>
+                </span>
+            </h1>
+            <script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/2.0.2/anime.min.js"></script>
+            <script src="animation.js"></script>
+        </div>
+        <div class="buttons">
+            <input type="file" id="photo" />
+            <button onclick="uploadImage()" class="button2">Upload Image</button>
+            <button onclick="Show3DModel()" class="button1">Show 3D Model</button>
+            <div class="box">
+                <img id="image" src="">
+            </div>
+
+
+        </div>
     </div>
-    
-    <button onclick="Show3DModel()">Show 3D Model</button>
     
   </body>
 </html>

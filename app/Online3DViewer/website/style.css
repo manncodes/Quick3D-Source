@@ -1,0 +1,136 @@
+*{
+    background-color: #FDFEFE;
+}
+
+.animated {
+  font-weight: 800;
+  font-size: 2.8em;
+  text-transform: none;
+  letter-spacing: 0em;
+  color: #70D2DB;
+  text-align: left;
+  padding-bottom: 10px;
+  -webkit-animation-duration: 2s;
+  animation-duration: 2s;
+  -webkit-animation-fill-mode: both;
+  animation-fill-mode: both;
+}
+
+@-webkit-keyframes fadeIn {
+  0% {
+      opacity: 0;
+  }
+
+  100% {
+      opacity: 1;
+  }
+}
+
+@keyframes fadeIn {
+  0% {
+      opacity: 0;
+  }
+
+  100% {
+      opacity: 1;
+  }
+}
+
+.fadeIn {
+  -webkit-animation-name: fadeIn;
+  animation-name: fadeIn;
+}
+
+.main-wrapper{
+    border: 2px dashed black;
+    height: 87vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    overflow: hidden;
+}
+
+input{
+    font-family: cursive;
+    font-size: medium;
+    color: tomato;
+}
+
+.buttons{
+    z-index: 3;
+    z-index: 3;
+    font-size: 3rem;
+    text-align: center;
+    font-weight: 600;
+    margin: 0px;
+}
+
+button{
+    padding: .9rem 1.5rem;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+    font-family: cursive;
+}
+
+.button1{
+    background-color: #85C1E9 ;
+    color: #fff;
+    transition: all 0.3s ease-in-out;
+}
+
+.button2{
+    background-color: #fff;
+    color: #0c8775;
+    transition: all 0.3s ease-in-out;
+}
+
+.button1:hover {
+    background-color: #fff;
+    color: #0c8775;
+}
+.button2:hover {
+    background-color: #85C1E9;
+    color: #fff;
+}
+
+.box{
+    margin-top: 24px;
+}
+
+.ml11 {
+    font-weight: 700;
+    font-size: 2.5em;
+    color: #333;
+  }
+  
+  .ml11 .text-wrapper {
+    position: relative;
+    display: inline-block;
+    padding-top: 0;
+    padding-right: 0;
+    padding-bottom: 0;
+  }
+  
+  .ml11 .line {
+    opacity: 0;
+    position: absolute;
+    left: 0;
+    height: 100%;
+    width: 3px;
+    background-color: #333;
+    transform-origin: 0 50%;
+  }
+  
+  .ml11 .line1 { 
+    top: 0; 
+    left: 0;
+  }
+  
+  .ml11 .letter {
+    display: inline-block;
+    line-height: 1em;
+  }
+
+
